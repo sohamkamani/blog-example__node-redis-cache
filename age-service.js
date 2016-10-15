@@ -13,13 +13,13 @@ const getAgeFromDb = (name, cb) => setTimeout(() => {
   cb(age)
 }, 1000)
 
-module.exports = name => new Promise(resolve => {
+module.exports = (name, cb) => {
   cache.get(name, (err, age) => {
     if (age !== null) {
-      return resolve(age)
+      return cb(age)
     }
     getAgeFromDb(name, age => {
-      cache.set(name, age, () => resolve(age))
+      cache.set(name, age, () => cb(age))
     })
   })
-})
+}

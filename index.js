@@ -4,10 +4,9 @@ const ageService = require('./age-service');
 
 app.get('/', function(req, res) {
   const {name} = req.query
-  ageService(name)
-    .then(age => {
-      res.end(age)
-    })
+  ageService(name, age => {
+    res.end(age)
+  })
 });
 
 app.listen(3000, function() {
